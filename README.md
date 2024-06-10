@@ -166,4 +166,4 @@ mixpanel.init(process.env.REACT_APP_MIXPANEL_TOKEN);
 
 By following these steps, you'll have a Mixpanel project configured and integrated with your React application, allowing you to track user interactions and gather valuable analytics data. For more detailed configurations and advanced features, refer to the Mixpanel documentation.
 
----
+---# mixpanel-integration
