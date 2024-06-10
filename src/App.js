@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { CssBaseline, Grid } from "@material-ui/core";
+import mixpanel from "mixpanel-browser";
 
 import Header from "./components/Header/Header";
 import List from "./components/List/List";
@@ -20,6 +21,8 @@ const App = () => {
   const [type, setType] = useState("restaurants");
   const [rating, setRating] = useState("");
 
+  mixpanel.init(process.env.REACT_APP_MIXPANEL_PROJECT_TOKEN, { debug: true });
+
   // get current location coords
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -35,6 +38,17 @@ const App = () => {
     setFilteredPlaces(filteredPlaces);
     // eslint-disable-next-line
   }, [rating]);
+
+  // Track page view
+  useEffect(() => {
+    mixpanel.track_pageview();
+    mixpanel.identify("USER_ID");
+    mixpanel.people.set({
+      $email: "user@example.com",
+      $first_name: "John",
+      $last_name: "Doe",
+    });
+  }, []);
 
   // get places and weather data
   useEffect(() => {
@@ -53,7 +67,6 @@ const App = () => {
     }
     // eslint-disable-next-line
   }, [type, bounds]);
-
   return (
     <>
       <CssBaseline />

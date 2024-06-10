@@ -15,6 +15,7 @@ import Rating from "@material-ui/lab/Rating";
 
 // Styles
 import useStyles from "./styles";
+import mixpanel from "mixpanel-browser";
 
 // Place Details
 const PlaceDetails = ({ place, selected, refProp }) => {
@@ -111,7 +112,10 @@ const PlaceDetails = ({ place, selected, refProp }) => {
             <Button
               size="small"
               color="primary"
-              onClick={() => window.open(place.web_url, "_blank")}
+              onClick={() => {
+mixpanel.track("Clicked Trip Advisor", { link: place.web_url });
+                window.open(place.web_url, "_blank");
+              }}
             >
               Trip Advisor
             </Button>
@@ -122,7 +126,12 @@ const PlaceDetails = ({ place, selected, refProp }) => {
             <Button
               size="small"
               color="primary"
-              onClick={() => window.open(place.website, "_blank")}
+              onClick={() => {
+                mixpanel.track("Clicked Website", {
+                  link: place.web_url,
+                });
+                window.open(place.website, "_blank");
+              }}
             >
               Website
             </Button>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, createRef } from "react";
+import mixpanel from "mixpanel-browser";
 import {
   CircularProgress,
   Grid,
@@ -51,7 +52,13 @@ const List = ({
           {/* Select Place Type */}
           <FormControl className={classes.formControl}>
             <InputLabel>Type</InputLabel>
-            <Select value={type} onChange={(e) => setType(e.target.value)}>
+            <Select
+              value={type}
+              onChange={(e) => {
+                setType(e.target.value);
+                mixpanel.track("Type Selected", { Type: e.target.value });
+              }}
+            >
               <MenuItem value="restaurants">Restaurants</MenuItem>
               <MenuItem value="hotels">Hotels</MenuItem>
               <MenuItem value="attractions">Attractions</MenuItem>
@@ -61,7 +68,13 @@ const List = ({
           {/* Select Ratings */}
           <FormControl className={classes.formControl}>
             <InputLabel>Rating</InputLabel>
-            <Select value={rating} onChange={(e) => setRating(e.target.value)}>
+            <Select
+              value={rating}
+              onChange={(e) => {
+                setRating(e.target.value);
+                mixpanel.track("Rating Selected", { Rate: e.target.value });
+              }}
+            >
               <MenuItem value={0}>All</MenuItem>
               <MenuItem value={3}>Above 3.0</MenuItem>
               <MenuItem value={4}>Above 4.0</MenuItem>
