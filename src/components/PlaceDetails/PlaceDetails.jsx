@@ -19,7 +19,7 @@ import useStyles from "./styles";
 // Place Details
 const PlaceDetails = ({ place, selected, refProp }) => {
   // get current selected place from map
- if (selected) {
+ if (selected && refProp?.current) {
    refProp.current.scrollIntoView({ behavior: "smooth", block: "start" });
  }
 

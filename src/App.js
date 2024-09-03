@@ -5,6 +5,7 @@ import Header from "./components/Header/Header";
 import List from "./components/List/List";
 import Map from "./components/Map/Map";
 import { getPlacesData, getWeatherData } from "./api";
+import LogRocket from "logrocket";
 
 // App
 const App = () => {
@@ -19,7 +20,17 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [type, setType] = useState("restaurants");
   const [rating, setRating] = useState("");
+  // Initialize LogRocket
+  LogRocket.init("cptoyr/travel-advisor-app");
 
+  // Use LogRocket.identify to distinguish and describe your users
+  LogRocket.identify("THE_USER_ID_IN_YOUR_APP", {
+    name: "Kishan Karena",
+    email: "kishan.k@example.com",
+
+    // Add your own custom user variables here, ie:
+    subscriptionType: "pro",
+  });
 
   // get current location coords
   useEffect(() => {
