@@ -1,5 +1,4 @@
 import React, { useState, useEffect, createRef } from "react";
-import mixpanel from "mixpanel-browser";
 import {
   CircularProgress,
   Grid,
@@ -56,7 +55,6 @@ const List = ({
               value={type}
               onChange={(e) => {
                 setType(e.target.value);
-                mixpanel.track("Type Selected", { Type: e.target.value });
               }}
             >
               <MenuItem value="restaurants">Restaurants</MenuItem>
@@ -72,7 +70,6 @@ const List = ({
               value={rating}
               onChange={(e) => {
                 setRating(e.target.value);
-                mixpanel.track("Rating Selected", { Rate: e.target.value });
               }}
             >
               <MenuItem value={0}>All</MenuItem>
