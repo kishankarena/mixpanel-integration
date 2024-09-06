@@ -1,4 +1,5 @@
 import axios from "axios";
+import LogRocket from "logrocket";
 
 // Get Places Data
 export const getPlacesData = async (type, sw, ne) => {
@@ -28,7 +29,16 @@ export const getPlacesData = async (type, sw, ne) => {
     return data;
   } catch (err) {
     // Error in fetching data
-    console.log(err);
+    LogRocket.captureException(err, {
+      tags: {
+        // additional data to be grouped as "tags"
+        apiTagFor: "Places",
+      },
+      extra: {
+        // additional arbitrary data associated with the event
+        pageName: "Landing Page",
+      },
+    });
   }
 };
 
@@ -53,6 +63,15 @@ export const getWeatherData = async (lat, lng) => {
     return data;
   } catch (err) {
     // Error in fetching data
-    console.log(err);
+    LogRocket.captureException(err, {
+      tags: {
+        // additional data to be grouped as "tags"
+        apiTagFor: "Weather",
+      },
+      extra: {
+        // additional arbitrary data associated with the event
+        pageName: "Landing Page",
+      },
+    });
   }
 };

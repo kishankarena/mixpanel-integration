@@ -156,6 +156,187 @@ To ensure LogRocket is working correctly:
 - Run your React app: `npm start` or `yarn start`.
 - Interact with your app, and then check your LogRocket dashboard for the session recordings.
 
+Here's a revised version of the section for your ReadMe file:
+
+---
+
+### 6. Capture Console Logs
+
+If you need to log data without it appearing in the browser console during development, use the following method:
+
+```javascript
+LogRocket.log('foo', { bar: 'baz' });
+```
+
+You can adjust LogRocket’s console capture behavior by modifying its settings as needed.
+
+Here’s the revised version for your ReadMe file:
+
+---
+#### Disable Console Logging
+
+To stop logging console data to LogRocket, set the `isEnabled` flag to `false`.
+
+#### Configuration Example:
+
+```javascript
+LogRocket.init(YOUR_APP_ID, {
+  console: {
+    isEnabled: false, // Disables logging of console data
+  },
+});
+```
+
+By default, `isEnabled` is set to `true`, allowing console data capture. To disable this, update the configuration as shown above.
+
+---
+
+### 7. Include iFrames within the Same Session Recording
+
+By default, LogRocket treats iframes as separate tabs in the video replay. If you want to merge iframes into a single video session, you can configure this by using the `mergeIframes` option.
+
+#### Merging iFrames into the Same Session Recording
+
+To include iframes within the same session recording, set the `mergeIframes` flag to `true`. Ensure this option is added to both your main `init()` call and the iframe's `init()` call.
+
+#### Configuration Example:
+
+```javascript
+LogRocket.init(YOUR_APP_ID, {
+  mergeIframes: true, // Merges iframes into a single video session
+});
+```
+
+By default, `mergeIframes` is set to `false`. To merge the iframes into a unified video recording, update the configuration as shown above.
+
+### 8. Tracking Custom Events with LogRocket
+
+If you use an analytics tool, you may already track custom events to measure user behavior. You can make these events accessible in LogRocket by using the `LogRocket.track()` method.
+
+#### Calling `LogRocket.track()`
+
+The `LogRocket.track()` method accepts a single string argument representing the event name:
+
+```javascript
+LogRocket.track('visited website');
+```
+
+You can search for sessions containing these events using a **Custom Event** filter in the LogRocket Dashboard.
+
+#### Adding Event Properties
+
+Optionally, you can pass a second object argument to provide additional properties related to the event. These properties help you capture more detailed information about the event.
+
+#### Example:
+
+```javascript
+LogRocket.track('visited website', {
+  website:'https://www.hotelthakar.com/'
+});
+```
+
+This allows you to log specific event details, making your session recordings and analytics more insightful.
+
+---
+
+Here’s the revised version for your ReadMe file:
+
+---
+
+### 9. Manually Reporting Errors with `captureException()`
+
+You can use `LogRocket.captureException()` to manually report errors caught in your code. This is useful for sending detailed error information and additional context to LogRocket for troubleshooting.
+
+#### Calling `captureException()`
+
+```javascript
+try {
+  doSomethingBroken();
+} catch (err) {
+  LogRocket.captureException(err, {
+    tags: {
+      // Additional data to be grouped as "tags"
+      subscription: 'Pro',
+    },
+    extra: {
+      // Additional arbitrary data associated with the event
+      pageName: 'ProfileView',
+    },
+  });
+}
+```
+
+#### Adding Tags and Extra Metadata
+
+You can use `tags` and `extra` to send additional metadata along with the error report:
+- **Tags**: Used for grouping data, such as user subscription levels or categories.
+- **Extra**: Arbitrary data to provide more context around the error, such as the page or action involved.
+
+Both `tags` and `extra` must contain scalar values (booleans, numbers, or strings). This metadata will appear alongside the error in the **Issues** view on the LogRocket dashboard, under **Custom Tags** and **Additional Data** sections respectively.
+
+---
+Here’s the rewritten version for your ReadMe file:
+
+---
+
+### 10. Capture Error Messages
+
+You can manually surface error messages in the LogRocket dashboard using the `LogRocket.captureMessage()` method. This allows you to log custom messages, which will be treated as errors in LogRocket for further tracking and investigation.
+
+#### Calling `captureMessage()`
+
+```javascript
+LogRocket.captureMessage('Something is wrong!', {
+  tags: {
+    // Additional data to be grouped as "tags"
+    subscription: 'Pro',
+  },
+  extra: {
+    // Additional arbitrary data associated with the event
+    pageName: 'ProfileView',
+  },
+});
+```
+Here’s the revised version for your ReadMe file:
+
+---
+
+### 11. Log Redux Actions
+
+LogRocket allows you to log Redux actions in your app along with the associated state, making it easier to track state changes during user sessions.
+
+#### Adding Redux Logs to LogRocket
+
+To log Redux actions in LogRocket, you need to add a middleware to your Redux store by calling `LogRocket.reduxMiddleware()`.
+
+#### Basic Installation:
+
+```javascript
+import { createStore, applyMiddleware } from 'redux';
+
+const store = createStore(
+  reducer, // your app reducer
+  applyMiddleware(LogRocket.reduxMiddleware())
+);
+```
+
+#### Using Redux with Other Middlewares
+
+If your app uses multiple middlewares, ensure that `LogRocket.reduxMiddleware()` is the final middleware in the chain:
+
+```javascript
+import { applyMiddleware, createStore } from 'redux';
+
+const store = createStore(
+  reducer, // your app reducer
+  applyMiddleware(middlewares, LogRocket.reduxMiddleware())
+);
+```
+
+By including this middleware, all Redux actions and their associated state will be captured in the LogRocket session recordings.
+
+---
+
 ## Troubleshooting
 
 If LogRocket isn't capturing sessions or if you're facing issues, consider:

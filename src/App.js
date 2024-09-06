@@ -21,7 +21,11 @@ const App = () => {
   const [type, setType] = useState("restaurants");
   const [rating, setRating] = useState("");
   // Initialize LogRocket
-  LogRocket.init("cptoyr/travel-advisor-app");
+  LogRocket.init("cptoyr/travel-advisor-app", {
+    // console: {
+    //   isEnabled: false,
+    // },
+  });
 
   // Use LogRocket.identify to distinguish and describe your users
   LogRocket.identify("THE_USER_ID_IN_YOUR_APP", {
@@ -40,6 +44,7 @@ const App = () => {
       }
     );
   }, []);
+
 
   // get filtered places rating wise
   useEffect(() => {

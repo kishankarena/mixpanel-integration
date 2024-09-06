@@ -12,6 +12,7 @@ import PlaceDetails from "../PlaceDetails/PlaceDetails";
 
 // Styles
 import useStyles from "./styles";
+import LogRocket from "logrocket";
 
 // List
 const List = ({
@@ -54,6 +55,10 @@ const List = ({
             <Select
               value={type}
               onChange={(e) => {
+                LogRocket.log("Type :", e.target.value);
+                LogRocket.track("Search For:", {
+                  type: e.target.value,
+                });
                 setType(e.target.value);
               }}
             >
