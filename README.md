@@ -29,13 +29,11 @@ REACT_APP_RAPID_API_KEY="XXXXXXXXXXXXXXXXXXXXX"
 
 1. Go to the [Google Cloud Developers Console](https://console.cloud.google.com/).
 2. Create a new project or select an existing one from the header section.
-   
-   ![Select Project](url-to-select-project-image)
 
 3. Navigate to **APIs & Services > Credentials** from the sidebar.
 4. Click on **Create Credentials > API Key**.
    
-   ![Create API Key](url-to-create-api-key-image)
+
 
 5. Click on **SHOW KEY** to reveal your `REACT_APP_GOOGLE_MAP_API_KEY`.
 
